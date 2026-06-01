@@ -25,6 +25,7 @@ dependencies = [
 test = [
     "pytest",
     "pytest-cov",
+    "coverage",
 ]
 build = [
     "build",
@@ -34,3 +35,6 @@ build = [
 [project.urls]
 Homepage = "https://github.com/ChowRex/pylgb"
 Documentation = "https://github.com/ChowRex/pylgb#readme"
+
+[tool.setuptools.packages.find]
+where = ["src"]
