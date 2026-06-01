@@ -102,7 +102,9 @@ class SmartBot(BaseBot):
         :class:`InteractiveBot`: For interactive cards.
     """
 
-    def __init__(self, webhook: Optional[str] = None, sign_secret: Optional[str] = None):
+    def __init__(
+        self, webhook: Optional[str] = None, sign_secret: Optional[str] = None
+    ):
         super().__init__(webhook, sign_secret)
         self.text = TextBot(webhook, sign_secret)
         self.post = PostBot(webhook, sign_secret)
@@ -141,11 +143,11 @@ class SmartBot(BaseBot):
         """
         if isinstance(message, str):
             return self.text.send(message, **kwargs)
-        elif isinstance(message, dict):
+        if isinstance(message, dict):
             if "image_key" in message:
                 return self.image.send(message["image_key"])
-            elif "card" in message:
+            if "card" in message:
                 return self.interactive.send(message["card"])
-            elif "title" in message and "content" in message:
+            if "title" in message and "content" in message:
                 return self.post.send(message["title"], message["content"])
         raise ValueError("Unsupported message type")

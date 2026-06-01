@@ -81,13 +81,10 @@ class InteractiveBot(BaseBot):
             ::
 
                 card = {
-                    "header": {"title": {"tag": "plain_text", "content": "Title"}},
-                    "elements": [{"tag": "div", "text": {"tag": "plain_text", "content": "Content"}}]
+                    "header": {"title": {"tag": "plain_text", "content": "T"}},
+                    "elements": [{"tag": "div", "text": {"tag": "plain_text"}}]
                 }
                 bot.send(card)
         """
-        data = {
-            "msg_type": "interactive",
-            "card": card
-        }
+        data = {"msg_type": "interactive", "card": card}
         return self._send(data)

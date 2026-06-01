@@ -7,6 +7,7 @@ This module provides the :class:`BaseBot` abstract class which serves as the
 foundation for all bot implementations. It handles webhook URL construction,
 signature generation, and HTTP communication with the Lark API.
 """
+
 from abc import ABC, abstractmethod
 from base64 import b64encode
 from hashlib import sha256
@@ -58,7 +59,9 @@ class BaseBot(ABC):
         Subclasses must implement the :meth:`send` method.
     """
 
-    def __init__(self, webhook: Optional[str] = None, sign_secret: Optional[str] = None):
+    def __init__(
+        self, webhook: Optional[str] = None, sign_secret: Optional[str] = None
+    ):
         # Get webhook from argument or environment
         if webhook is None:
             webhook = get_env_webhook()
@@ -74,7 +77,9 @@ class BaseBot(ABC):
             self.webhook = f"{WEBHOOK_URL}{webhook}"
 
         # Get sign_secret from argument or environment
-        self._sign_secret = sign_secret if sign_secret is not None else get_env_sign_secret()
+        self._sign_secret = (
+            sign_secret if sign_secret is not None else get_env_sign_secret()
+        )
 
     def _gen_sign(self, timestamp: str) -> str:
         """
@@ -97,9 +102,7 @@ class BaseBot(ABC):
         string_to_sign = f"{timestamp}\n{self._sign_secret}"
         # Sign an empty string using string_to_sign as the key
         hmac_code = new(
-            string_to_sign.encode("utf-8"),
-            b"",  # Empty bytes
-            digestmod=sha256
+            string_to_sign.encode("utf-8"), b"", digestmod=sha256  # Empty bytes
         ).digest()
         sign = b64encode(hmac_code).decode("utf-8")
         return sign

@@ -1,0 +1,17 @@
+[MESSAGES CONTROL]
+disable=
+    C0114,  # missing-module-docstring (we have them)
+    C0115,  # missing-class-docstring (we have them)
+    C0116,  # missing-function-docstring (we have them)
+    R0903,  # too-few-public-methods (fine for our use case)
+    W0221,  # arguments-differ (intentional for our API design)
+    R0801,  # duplicate-code (intentional __all__ exports)
+    W0107,  # unnecessary-pass (needed for pragma: no cover)
+    W0212,  # protected-access (needed for testing)
+    C0415,  # import-outside-toplevel (needed for testing)
+
+[FORMAT]
+max-line-length=100
+
+[BASIC]
+docstring-min-length=5

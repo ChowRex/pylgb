@@ -91,13 +91,6 @@ class PostBot(BaseBot):
         """
         data = {
             "msg_type": "post",
-            "content": {
-                "post": {
-                    "zh_cn": {
-                        "title": title,
-                        "content": content
-                    }
-                }
-            }
+            "content": {"post": {"zh_cn": {"title": title, "content": content}}},
         }
         return self._send(data)

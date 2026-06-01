@@ -13,6 +13,7 @@ from typing import Optional
 # Try to load .env file if python-dotenv is available
 try:
     from dotenv import load_dotenv  # pragma: no cover
+
     # Load .env from current directory or project root
     env_path = Path.cwd() / ".env"  # pragma: no cover
     if env_path.exists():  # pragma: no cover

@@ -71,8 +71,5 @@ class ImageBot(BaseBot):
 
                 bot.send("img_xxxx")
         """
-        data = {
-            "msg_type": "image",
-            "content": {"image_key": image_key}
-        }
+        data = {"msg_type": "image", "content": {"image_key": image_key}}
         return self._send(data)

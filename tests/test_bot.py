@@ -43,7 +43,10 @@ class TestTextBot:
             bot = TextBot("test-key")
             bot.send("Hello", mentioned_list=["ou_xxx", "@all"])
             call_kwargs = mock_post.call_args.kwargs
-            assert call_kwargs["json"]["content"]["mentioned_list"] == ["ou_xxx", "@all"]
+            assert call_kwargs["json"]["content"]["mentioned_list"] == [
+                "ou_xxx",
+                "@all",
+            ]
 
     def test_send_with_sign_secret(self):
         """Test sending message with sign_secret."""
@@ -145,7 +148,9 @@ class TestSmartBot:
         with patch("pylgb.bot._abstract.post") as mock_post:
             mock_post.return_value = MagicMock(json=lambda: {"StatusCode": 0})
             bot = SmartBot("test-key")
-            bot.send({"title": "Title", "content": [[{"tag": "text", "text": "Hello"}]]})
+            bot.send(
+                {"title": "Title", "content": [[{"tag": "text", "text": "Hello"}]]}
+            )
             call_kwargs = mock_post.call_args.kwargs
             assert call_kwargs["json"]["msg_type"] == "post"
 
@@ -173,12 +178,13 @@ class TestSignature:
         # string_to_sign = timestamp + "\n" + secret is the HMAC key
         # Sign an empty string, then Base64 encode
         from base64 import b64encode
+
         string_to_sign = f"{timestamp}\nsign-secret"
         expected = b64encode(
             hmac.new(
                 string_to_sign.encode("utf-8"),
                 b"",  # Empty bytes
-                digestmod=hashlib.sha256
+                digestmod=hashlib.sha256,
             ).digest()
         ).decode("utf-8")
 
@@ -199,6 +205,7 @@ class TestConstants:
     def test_webhook_url(self):
         """Test webhook URL constant."""
         from pylgb._constants import WEBHOOK_URL
+
         assert WEBHOOK_URL == "https://open.feishu.cn/open-apis/bot/v2/hook/"
 
     def test_get_env_webhook(self, monkeypatch):

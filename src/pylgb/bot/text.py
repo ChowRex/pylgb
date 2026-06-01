@@ -87,10 +87,8 @@ class TextBot(BaseBot):
                 bot.send("Hello, World!")
                 bot.send("Important!", mentioned_list=["ou_xxxx", "@all"])
         """
-        data = {
-            "msg_type": "text",
-            "content": {"text": text}
-        }
+        content: dict = {"text": text}
         if mentioned_list:
-            data["content"]["mentioned_list"] = mentioned_list
+            content["mentioned_list"] = mentioned_list
+        data = {"msg_type": "text", "content": content}
         return self._send(data)
