@@ -37,7 +37,7 @@ Example:
 """
 
 __author__ = "ChowRex"
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 
 from .bot import SmartBot, TextBot, PostBot, ImageBot, InteractiveBot
 
