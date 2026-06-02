@@ -25,7 +25,6 @@ dependencies = [
 test = [
     "pytest",
     "pytest-cov",
-    "coverage",
 ]
 build = [
     "build",
